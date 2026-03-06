@@ -3,43 +3,81 @@
 <head>
 
 <title>LTFC AI Assistant</title>
+
 <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<nav class="navbar">
+<div class="navbar">
 
-<h2>LTFC Fan Platform</h2>
+<div class="logo">LTFC</div>
 
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">Fan Feed</a></li>
-<li><a href="#">AI Chat</a></li>
-</ul>
+<div class="navlinks">
 
-</nav>
+<a href="#">Home</a>
+<a href="#">Feed</a>
+<a href="#">News</a>
+<a href="#">Matches</a>
+<a href="#">Players</a>
+
+</div>
+
+</div>
+
+<div class="nav-strip"></div>
+
 
 <div class="chat-container">
 
-<h1 class="chat-title">LTFC AI Assistant</h1>
+<div class="chat-header">
 
-<div id="chatbox" class="chatbox"></div>
+<div class="bot-icon">⚽</div>
 
-<div class="input-area">
+<div>
 
-<input 
+<h3>LTFC AI Assistant</h3>
+<p>Ask anything about Luton Town</p>
+
+</div>
+
+</div>
+
+
+<div class="welcome" id="welcome">
+
+<h2>How can I help you today?</h2>
+
+<div class="suggestions">
+
+<button onclick="askExample('Next match')">Next Match</button>
+<button onclick="askExample('Team players')">Players</button>
+<button onclick="askExample('Latest news')">Latest News</button>
+<button onclick="askExample('Fan discussions')">Fan Topics</button>
+
+</div>
+
+</div>
+
+
+<div id="chatbox"></div>
+
+
+<div class="chat-input">
+
+<input
 id="userInput"
 type="text"
-placeholder="Ask about matches, players, or news..."
+placeholder="Ask about matches, players..."
 >
 
-<button onclick="sendMessage()">Send</button>
+<button onclick="sendMessage()">➤</button>
 
 </div>
 
 </div>
+
 
 <script src="script.js"></script>
 

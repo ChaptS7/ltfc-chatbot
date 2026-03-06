@@ -1,27 +1,43 @@
-async function sendMessage() {
+function sendMessage(){
 
-  const input = document.getElementById("userInput");
-  const message = input.value;
+let input = document.getElementById("userInput")
+let message = input.value
 
-  if (!message) return;
+if(message === "") return
 
-  const chatbox = document.getElementById("chatbox");
+let chatbox = document.getElementById("chatbox")
 
-  chatbox.innerHTML += "<p><b>You:</b> " + message + "</p>";
+let user = document.createElement("div")
+user.className = "user-message"
+user.innerText = message
 
-  input.value = "";
+chatbox.appendChild(user)
 
-  const response = await fetch("/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      message: message
-    })
-  });
+input.value = ""
 
-  const data = await response.json();
+let bot = document.createElement("div")
+bot.className = "bot-message"
+bot.innerText = "Thinking..."
 
-  chatbox.innerHTML += "<p><b>Bot:</b> " + data.reply + "</p>";
+chatbox.appendChild(bot)
+
+fetch("/chat",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({message:message})
+})
+.then(res=>res.json())
+.then(data=>{
+bot.innerText = data.reply
+})
+
+}
+
+function askExample(text){
+
+document.getElementById("userInput").value = text
+sendMessage()
+
 }

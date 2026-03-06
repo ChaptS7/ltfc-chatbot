@@ -1,39 +1,43 @@
-require("dotenv").config();
+require("dotenv").config()
 
-const express = require("express");
-const cors = require("cors");
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const express = require("express")
+const cors = require("cors")
+const { GoogleGenerativeAI } = require("@google/generative-ai")
 
-const app = express();
+const app = express()
 
-app.use(cors());
-app.use(express.json());
-app.use(express.static("public"));
+app.use(cors())
+app.use(express.json())
+app.use(express.static("public"))
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 
-app.post("/chat", async (req, res) => {
-  try {
+app.post("/chat", async (req,res)=>{
 
-    const userMessage = req.body.message;
+try{
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash"
-    });
+const userMessage = req.body.message
 
-    const result = await model.generateContent(userMessage);
+const model = genAI.getGenerativeModel({
+model:"gemini-2.5-flash"
+})
 
-    const response = await result.response;
-    const text = response.text();
+const result = await model.generateContent(userMessage)
 
-    res.json({ reply: text });
+const reply = result.response.text()
 
-  } catch (error) {
-    console.error(error);
-    res.json({ reply: "Error generating response" });
-  }
-});
+res.json({reply})
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
-});
+}catch(error){
+
+console.log(error)
+res.json({reply:"Error generating response"})
+
+}
+
+})
+
+app.listen(3000,()=>{
+
+console.log("Server running on http://localhost:3000")
+})
